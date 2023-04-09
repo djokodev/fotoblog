@@ -19,6 +19,8 @@ from django.urls import path
 from authentication import views
 import blog.views
 from django.contrib.auth.views import LoginView #utilisation de la vue generique LoginView :-)
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,5 +30,10 @@ urlpatterns = [
     ), name="login"),
     path("logout/", views.logout_user, name="logout"),
     path("home/", blog.views.home, name="home"),
-    path("signup/", views.signup_page, name='signup')
+    path("signup/", views.signup_page, name='signup'),
+    path("photo/upload/", blog.views.photo_upload, name="photo_upload"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static\
+        (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
