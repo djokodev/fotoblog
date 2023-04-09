@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+import authentication.views
 from authentication import views
 import blog.views
 from django.contrib.auth.views import LoginView #utilisation de la vue generique LoginView :-)
@@ -32,6 +34,7 @@ urlpatterns = [
     path("home/", blog.views.home, name="home"),
     path("signup/", views.signup_page, name='signup'),
     path("photo/upload/", blog.views.photo_upload, name="photo_upload"),
+    path("profile-photo/upload", authentication.views.upload_profile_photo, name="upload_profile_photo"),
 ]
 
 if settings.DEBUG:
